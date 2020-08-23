@@ -176,8 +176,8 @@ export default class Personality {
    */
   save(toolsContent) {
     const link = toolsContent.querySelector(`.${this.CSS.link}`).textContent;
-    const name = toolsContent.querySelector(`.${this.CSS.name}`).textContent;
-    const description = toolsContent.querySelector(`.${this.CSS.description}`).textContent;
+    const name = toolsContent.querySelector(`.${this.CSS.name}`).innerHTML;
+    const description = toolsContent.querySelector(`.${this.CSS.description}`).innerHTML;
 
     Object.assign(this.data, {
       name: name || this._data.name,
@@ -237,19 +237,19 @@ export default class Personality {
     }
 
     if (description) {
-      this.nodes.description.textContent = description;
+      this.nodes.description.innerHTML = description;
     } else {
       this.nodes.description.dataset.placeholder = this.config.descriptionPlaceholder;
     }
 
     if (name) {
-      this.nodes.name.textContent = name;
+      this.nodes.name.innerHTML = name;
     } else {
       this.nodes.name.dataset.placeholder = this.config.namePlaceholder;
     }
 
     if (link) {
-      this.nodes.link.textContent = link;
+      this.nodes.link.innerHTML = link;
     } else {
       this.nodes.link.dataset.placeholder = this.config.linkPlaceholder;
     }
