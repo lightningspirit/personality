@@ -54,7 +54,7 @@ export default class Personality {
       name: null,
       description: null,
       link: null,
-      photo: null
+      photo: null,
     };
 
     this.config = {
@@ -63,7 +63,7 @@ export default class Personality {
       types: config.types || 'image/*',
       namePlaceholder: config.namePlaceholder || 'Name',
       descriptionPlaceholder: config.descriptionPlaceholder || 'Description',
-      linkPlaceholder: config.linkPlaceholder || 'Link'
+      linkPlaceholder: config.linkPlaceholder || 'Link',
     };
 
     /**
@@ -78,7 +78,7 @@ export default class Personality {
     this.uploader = new Uploader({
       config: this.config,
       onUpload: (response) => this.onUpload(response),
-      onError: (error) => this.uploadingFailed(error)
+      onError: (error) => this.uploadingFailed(error),
     });
   }
 
@@ -90,12 +90,13 @@ export default class Personality {
   static get toolbox() {
     return {
       icon: ToolboxIcon,
-      title: 'Personality'
+      title: 'Personality',
     };
   }
 
   /**
    * File uploading callback
+   *
    * @param {UploadResponseFormat} response
    */
   onUpload(response) {
@@ -138,6 +139,7 @@ export default class Personality {
 
   /**
    * If file uploading failed, remove loader and show notification
+   *
    * @param {string} errorMessage -  error message
    */
   uploadingFailed(errorMessage) {
@@ -145,7 +147,7 @@ export default class Personality {
 
     this.api.notifier.show({
       message: errorMessage,
-      style: 'error'
+      style: 'error',
     });
   }
 
@@ -165,14 +167,15 @@ export default class Personality {
       name: 'cdx-personality__name',
       photo: 'cdx-personality__photo',
       link: 'cdx-personality__link',
-      description: 'cdx-personality__description'
+      description: 'cdx-personality__description',
     };
   }
 
   /**
    * Return Block data
+   *
    * @param {HTMLElement} toolsContent
-   * @return {PersonalityToolData}
+   * @returns {PersonalityToolData}
    */
   save(toolsContent) {
     const link = toolsContent.querySelector(`.${this.CSS.link}`).textContent;
@@ -182,7 +185,7 @@ export default class Personality {
     Object.assign(this.data, {
       name: name || this._data.name,
       description: description || this._data.description,
-      link: link || this._data.link
+      link: link || this._data.link,
     });
 
     return this.data;
@@ -190,6 +193,7 @@ export default class Personality {
 
   /**
    * Stores all Tool's data
+   *
    * @param {PersonalityToolData} data
    */
   set data({ name, description, link, photo }) {
@@ -197,13 +201,14 @@ export default class Personality {
       name: name || this._data.name,
       description: description || this._data.description,
       link: link || this._data.link,
-      photo: photo || this._data.photo
+      photo: photo || this._data.photo,
     });
   }
 
   /**
    * Return Tool data
-   * @return {PersonalityToolData} data
+   *
+   * @returns {PersonalityToolData} data
    */
   get data() {
     return this._data;
@@ -211,7 +216,8 @@ export default class Personality {
 
   /**
    * Renders Block content
-   * @return {HTMLDivElement}
+   *
+   * @returns {HTMLDivElement}
    */
   render() {
     const { name, description, photo, link } = this.data;
@@ -219,15 +225,15 @@ export default class Personality {
     this.nodes.wrapper = this.make('div', this.CSS.wrapper);
 
     this.nodes.name = this.make('div', this.CSS.name, {
-      contentEditable: true
+      contentEditable: true,
     });
 
     this.nodes.description = this.make('div', this.CSS.description, {
-      contentEditable: true
+      contentEditable: true,
     });
 
     this.nodes.link = this.make('div', this.CSS.link, {
-      contentEditable: true
+      contentEditable: true,
     });
 
     this.nodes.photo = this.make('div', this.CSS.photo);
@@ -258,7 +264,7 @@ export default class Personality {
       this.uploader.uploadSelectedFile({
         onPreview: () => {
           this.addLoader();
-        }
+        },
       });
     });
 
@@ -272,10 +278,11 @@ export default class Personality {
 
   /**
    * Helper method for elements creation
+   *
    * @param tagName
    * @param classNames
    * @param attributes
-   * @return {HTMLElement}
+   * @returns {HTMLElement}
    */
   make(tagName, classNames = null, attributes = {}) {
     const el = document.createElement(tagName);
